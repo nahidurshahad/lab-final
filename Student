@@ -1,0 +1,61 @@
+#include <stdio.h>
+
+struct Student
+{
+    char name[50];
+    int id;
+    int marks;
+};
+
+int main()
+{
+    int n, i, j;
+
+    scanf("%d", &n);
+
+    struct Student s[n + 5];
+
+    for(i = 0; i < n; i++)
+    {
+        scanf("%s %d %d",
+              s[i].name,
+              &s[i].id,
+              &s[i].marks);
+    }
+
+    for(i = 0; i < n - 1; i++)
+    {
+        for(j = 0; j < n - i - 1; j++)
+        {
+            if(s[j].marks < s[j + 1].marks)
+            {
+                struct Student temp;
+
+                temp = s[j];
+                s[j] = s[j + 1];
+                s[j + 1] = temp;
+            }
+            else if(s[j].marks == s[j + 1].marks)
+            {
+                if(s[j].id > s[j + 1].id)
+                {
+                    struct Student temp;
+
+                    temp = s[j];
+                    s[j] = s[j + 1];
+                    s[j + 1] = temp;
+                }
+            }
+        }
+    }
+
+    for(i = 0; i < n; i++)
+    {
+        printf("%d %s %d\n",
+               s[i].id,
+               s[i].name,
+               s[i].marks);
+    }
+
+    return 0;
+}
